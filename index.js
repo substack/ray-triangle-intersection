@@ -17,9 +17,14 @@ function intersectTriangle (out, pt, dir, tri) {
     
     cross(pvec, dir, edge2);
     var det = dot(edge1, pvec);
-    
+    if(det > 0) {
+        sub(tvec, pt, tri[0]);
+    }else {
+        sub(tvec, tri[0], pt);
+        det *= -1;
+    }
     if (det < EPSILON) return null;
-    sub(tvec, pt, tri[0]);
+
     var u = dot(tvec, pvec);
     if (u < 0 || u > det) return null;
     cross(qvec, tvec, edge1);
